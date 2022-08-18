@@ -1,12 +1,12 @@
-import { h, VNode } from 'snabbdom';
-import { onInsert } from 'common/snabbdom';
-import TournamentController from '../ctrl';
-import { MaybeVNodes } from '../interfaces';
 import * as pagination from '../pagination';
-import { controls, standing } from './arena';
-import { teamStanding } from './battle';
-import teamInfo from './teamInfo';
 import header from './header';
+import teamInfo from './teamInfo';
+import TournamentController from '../ctrl';
+import { controls, standing } from './arena';
+import { h, VNode } from 'snabbdom';
+import { MaybeVNodes } from '../interfaces';
+import { onInsert } from 'common/snabbdom';
+import { teamStanding } from './battle';
 
 export const name = 'created';
 
@@ -26,6 +26,5 @@ export function main(ctrl: TournamentController): MaybeVNodes {
   ];
 }
 
-export function table(ctrl: TournamentController): VNode | undefined {
-  return ctrl.teamInfo.requested ? teamInfo(ctrl) : undefined;
-}
+export const table = (ctrl: TournamentController): VNode | undefined =>
+  ctrl.teamInfo.requested ? teamInfo(ctrl) : undefined;
