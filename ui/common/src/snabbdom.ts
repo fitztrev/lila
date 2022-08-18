@@ -3,11 +3,9 @@ import type { VNode, Hooks, Attrs } from 'snabbdom';
 export type MaybeVNode = VNode | string | null | undefined;
 export type MaybeVNodes = MaybeVNode[];
 
-export function onInsert<A extends HTMLElement>(f: (element: A) => void): Hooks {
-  return {
-    insert: vnode => f(vnode.elm as A),
-  };
-}
+export const onInsert = <A extends HTMLElement>(f: (element: A) => void): Hooks => ({
+  insert: vnode => f(vnode.elm as A),
+});
 
 export function bind(eventName: string, f: (e: Event) => any, redraw?: () => void, passive = true): Hooks {
   return onInsert(el =>
