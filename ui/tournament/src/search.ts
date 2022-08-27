@@ -2,8 +2,8 @@ import { h, VNode } from 'snabbdom';
 import { bind, onInsert } from 'common/snabbdom';
 import TournamentController from './ctrl';
 
-export function button(ctrl: TournamentController): VNode {
-  return h('button.fbt', {
+export const button = (ctrl: TournamentController): VNode =>
+  h('button.fbt', {
     class: { active: ctrl.searching },
     attrs: {
       'data-icon': ctrl.searching ? '' : '',
@@ -11,7 +11,6 @@ export function button(ctrl: TournamentController): VNode {
     },
     hook: bind('click', ctrl.toggleSearch, ctrl.redraw),
   });
-}
 
 export function input(ctrl: TournamentController): VNode {
   return h(
