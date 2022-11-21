@@ -54,7 +54,7 @@ RUN curl -s "https://get.sdkman.io" | bash \
   && sdk install java 17.0.3-tem \
   && sdk install sbt
 
-# Install Rust and Cargo, needed for fishnet
+# Install Rust and Cargo, needed for fishnet and lila-engine
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 # Install bloop + scala formatter
