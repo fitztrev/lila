@@ -1,3 +1,3 @@
 #!/bin/sh
 
-echo "Running postStart.sh"
+echo "running postStart.sh"

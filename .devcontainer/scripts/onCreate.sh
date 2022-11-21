@@ -1,3 +1,4 @@
 #!/bin/sh
 
-echo "Running onCreate.sh"
+# cd /workspaces/lila
+# ./ui/build
