@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 
 whoami
-. ~/.bashrc
 
 node --version
-sbt --help
-bloop about
 
 # cd /workspaces
 # git clone https://github.com/lichess-org/lila-ws.git
