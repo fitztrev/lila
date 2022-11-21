@@ -36,4 +36,4 @@ mkdir -p /workspaces/mongodb-data
 sudo mongod --fork --dbpath /workspaces/mongodb-data --logpath /var/log/mongod.log
 mongo lichess /workspaces/lila/bin/mongodb/indexes.js
 python3.9 /workspaces/lila-db-seed/spamdb/spamdb.py --drop all
-redis-server --daemonize yes
+sudo killall mongod

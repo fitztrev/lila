@@ -30,6 +30,5 @@
     },
     "onCreateCommand": "sh /workspaces/lila/.devcontainer/scripts/onCreate.sh",
     "postCreateCommand": "sh /workspaces/lila/.devcontainer/scripts/postCreate.sh",
-    "postAttachCommand": "sh /workspaces/lila/.devcontainer/scripts/postAttach.sh",
     "postStartCommand": "sh /workspaces/lila/.devcontainer/scripts/postStart.sh"
 }
