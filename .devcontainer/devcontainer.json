@@ -1,5 +1,6 @@
 {
     "name": "Lila Codespace",
+    "image": "ghcr.io/rosen-score/lila-codespace:main",
     "extensions": [
         "scala-lang.scala"
     ],
@@ -12,7 +13,7 @@
     ],
     "portsAttributes": {
         "8080": {
-            "label": "Your Lichess development site"
+            "label": "Lichess dev site"
         },
         "9663": {
             "label": "lila"
@@ -26,9 +27,6 @@
         "9666": {
             "label": "lila-engine (External engine API)"
         }
-    },
-    "build": {
-        "dockerfile": "Dockerfile"
     },
     "onCreateCommand": "sh /workspaces/lila/.devcontainer/scripts/onCreate.sh",
     "postCreateCommand": "sh /workspaces/lila/.devcontainer/scripts/postCreate.sh",
