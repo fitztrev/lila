@@ -1,5 +1,7 @@
 #!/bin/sh
 
+su - lichess
+
 cd /workspaces
 git clone https://github.com/lichess-org/lila-ws.git
 git clone https://github.com/lichess-org/lila-db-seed.git
