@@ -1,11 +1,17 @@
 #!/bin/sh
 
 whoami
-. ~/.bashrc
+ps -p $$
+echo $SHELL
+echo $0
 
-node --version
-sbt --help
-bloop about
+cat /etc/shells
+
+# . ~/.bashrc
+
+# node --version
+# sbt --help
+# bloop about
 
 
 # cd /workspaces
