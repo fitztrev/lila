@@ -1,0 +1,12 @@
+{
+    "name": "Lila Codespace",
+    "extensions": [
+        "scala-lang.scala"
+    ],
+    "forwardPorts": [
+        8080
+    ],
+    "build": {
+        "dockerfile": "Dockerfile"
+    }
+}
