@@ -14,7 +14,7 @@ mongo lichess /workspaces/lila/bin/mongodb/indexes.js
 python3.9 /workspaces/lila-db-seed/spamdb/spamdb.py --drop all
 sudo killall mongod
 
-cd /workspace/lila-ws
+cd /workspaces/lila-ws
 sbt compile
 
 cd /workspaces/lila
