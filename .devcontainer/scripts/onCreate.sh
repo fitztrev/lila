@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 whoami
 ps -p $$
@@ -9,10 +9,9 @@ cat /etc/shells
 
 # . ~/.bashrc
 
-# node --version
-# sbt --help
-# bloop about
-
+node --version
+sbt --help
+bloop about
 
 # cd /workspaces
 # git clone https://github.com/lichess-org/lila-ws.git

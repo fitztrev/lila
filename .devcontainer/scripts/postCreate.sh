@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 ## Create config for lila
 cp /workspaces/lila/conf/application.conf.default /workspaces/lila/conf/application.conf
