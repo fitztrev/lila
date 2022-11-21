@@ -28,7 +28,7 @@
             "label": "lila-engine (External engine API)"
         }
     },
-    "onCreateCommand": "node --version",
+    "onCreateCommand": "/bin/bash .devcontainer/scripts/onCreate.sh",
     "postCreateCommand": "/bin/bash .devcontainer/scripts/postCreate.sh",
     "postStartCommand": "/bin/bash .devcontainer/scripts/postStart.sh"
 }

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo '####### starting onCreate.sh ###################'
+
 whoami
 
 node --version
@@ -26,3 +28,5 @@ node --version
 # bloop compile lila
 
 # ./ui/build
+
+echo '####### ending onCreate.sh ###################'
