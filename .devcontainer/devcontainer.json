@@ -30,8 +30,8 @@
     "build": {
         "dockerfile": "Dockerfile"
     },
-    "onCreateCommand": "sh /workspaces/lila/.devcontainer/onCreate.sh",
-    "postCreateCommand": "sh /workspaces/lila/.devcontainer/postCreate.sh",
-    "postAttachCommand": "sh /workspaces/lila/.devcontainer/postAttach.sh",
-    "postStartCommand": "sh /workspaces/lila/.devcontainer/postStart.sh"
+    "onCreateCommand": "sh /workspaces/lila/.devcontainer/scripts/onCreate.sh",
+    "postCreateCommand": "sh /workspaces/lila/.devcontainer/scripts/postCreate.sh",
+    "postAttachCommand": "sh /workspaces/lila/.devcontainer/scripts/postAttach.sh",
+    "postStartCommand": "sh /workspaces/lila/.devcontainer/scripts/postStart.sh"
 }
