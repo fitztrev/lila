@@ -1,7 +1,7 @@
 #!/bin/sh
 
 whoami
-source ~/.bashrc
+. ~/.bashrc
 
 node --version
 sbt --help
