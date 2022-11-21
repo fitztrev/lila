@@ -30,3 +30,37 @@ RUN sudo apt-get autoremove -y \
 # Add nginx site config
 COPY build/nginx/lichess.conf /etc/nginx/sites-enabled/
 RUN rm /etc/nginx/sites-enabled/default
+
+# Create "lichess" user with sudo access
+RUN useradd --create-home --shell /bin/bash --password lichess lichess
+RUN echo "lichess ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+USER lichess
+
+# Install pymongo needed for lila-db-seed
+RUN python3.9 -m pip install pymongo
+
+# Install nvm, npm, and yarn
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash \
+  && export NVM_DIR="$HOME/.nvm" \
+  && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" \
+  && echo ". \"$HOME/.nvm/nvm.sh\"" >> ~/.bashrc \
+  && nvm install 16 \
+  && npm install -g yarn
+
+# Install Java
+RUN curl -s "https://get.sdkman.io" | bash \
+  && source "$HOME/.sdkman/bin/sdkman-init.sh" \
+  && sdk version \
+  && sdk install java 17.0.3-tem \
+  && sdk install sbt
+
+# Install Rust and Cargo, needed for fishnet
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+# Install bloop + scala formatter
+RUN cs install bloop --only-prebuilt=true \
+  && cs install scalafmt \
+  && echo 'export PATH="$PATH:$HOME/.local/share/coursier/bin"' >> ~/.bashrc
+
+# Silence the parallel citation warning
+RUN mkdir -p ~/.parallel && touch ~/.parallel/will-cite
