@@ -1,14 +1,7 @@
 #!/usr/bin/env bash
 
 whoami
-ps -p $$
-echo $SHELL
-echo $0
-
-cat /etc/shells
-
-# . ~/.bashrc
-source ~/.bashrc
+. ~/.bashrc
 
 node --version
 sbt --help
