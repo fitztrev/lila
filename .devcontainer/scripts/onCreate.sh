@@ -1,4 +1,10 @@
 #!/bin/sh
 
-# cd /workspaces/lila
-# ./ui/build
+cd /workspace/lila-ws
+sbt compile
+
+cd /workspaces/lila
+sbt bloopInstall
+bloop compile lila
+
+./ui/build
