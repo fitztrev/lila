@@ -8,6 +8,7 @@ echo $0
 cat /etc/shells
 
 # . ~/.bashrc
+source ~/.bashrc
 
 node --version
 sbt --help
