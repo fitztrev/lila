@@ -2,6 +2,7 @@ package lila.security
 
 import play.api.libs.ws.StandaloneWSClient
 import play.api.libs.ws.DefaultBodyReadables.*
+import play.api.Mode
 
 import lila.common.Domain
 
@@ -227,4 +228,5 @@ private object DisposableEmailDomain:
     "startmail.com",
     "palaciodegranda.com",
     "laudepalaciogranda.com"
-  )
+  ) ++ Set("localhost")
+  // ++ (if mode != Mode.Prod then Set("localhost") else Set.empty)
