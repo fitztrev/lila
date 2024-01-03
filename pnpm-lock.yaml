@@ -85,6 +85,9 @@ importers:
       '@types/highcharts':
         specifier: '=4.2.57'
         version: 4.2.57
+      '@types/sortablejs':
+        specifier: ^1.15.7
+        version: 1.15.7
       '@types/yaireo__tagify':
         specifier: ^4.17.3
         version: 4.17.3
@@ -124,6 +127,9 @@ importers:
       snabbdom:
         specifier: ^3.5.1
         version: 3.5.1
+      sortablejs:
+        specifier: ^1.15.1
+        version: 1.15.1
       tree:
         specifier: workspace:*
         version: link:../tree
@@ -1807,6 +1813,10 @@ packages:
 
   /@types/semver@7.5.0:
     resolution: {integrity: sha512-G8hZ6XJiHnuhQKR7ZmysCeJWE08o8T0AXtk5darsCaTVsYZhhgUrq53jizaR2FvsoeCwJhlmwTjkXBY5Pn/ZHw==}
+    dev: false
+
+  /@types/sortablejs@1.15.7:
+    resolution: {integrity: sha512-PvgWCx1Lbgm88FdQ6S7OGvLIjWS66mudKPlfdrWil0TjsO5zmoZmzoKiiwRShs1dwPgrlkr0N4ewuy0/+QUXYQ==}
     dev: false
 
   /@types/stack-utils@2.0.1:
@@ -4596,6 +4606,10 @@ packages:
   /snabbdom@3.5.1:
     resolution: {integrity: sha512-wHMNIOjkm/YNE5EM3RCbr/+DVgPg6AqQAX1eOxO46zYNvCXjKP5Y865tqQj3EXnaMBjkxmQA5jFuDpDK/dbfiA==}
     engines: {node: '>=8.3.0'}
+    dev: false
+
+  /sortablejs@1.15.1:
+    resolution: {integrity: sha512-P5Cjvb0UG1ZVNiDPj/n4V+DinttXG6K8n7vM/HQf0C25K3YKQTQY6fsr/sEGsJGpQ9exmPxluHxKBc0mLKU1lQ==}
     dev: false
 
   /source-map-js@1.0.2:

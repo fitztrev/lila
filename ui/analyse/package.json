@@ -17,6 +17,7 @@
     "@badrap/result": "^0.2.13",
     "@types/debounce-promise": "^3.1.6",
     "@types/highcharts": "=4.2.57",
+    "@types/sortablejs": "^1.15.7",
     "@types/yaireo__tagify": "^4.17.3",
     "@yaireo/tagify": "^4.17.9",
     "ceval": "workspace:*",
@@ -30,6 +31,7 @@
     "nvui": "workspace:*",
     "prop-types": "^15.8.1",
     "snabbdom": "^3.5.1",
+    "sortablejs": "^1.15.1",
     "tree": "workspace:*"
   },
   "scripts": {
@@ -41,6 +43,7 @@
     "modules": {
       "esm": {
         "src/main.ts": "analysisBoard",
+        "src/plugins/sortable.ts": "sortable",
         "src/plugins/studyMain.ts": "analysisBoard.study",
         "src/plugins/nvui.ts": "analysisBoard.nvui",
         "src/plugins/studyTopicForm.ts": "study.topic.form"

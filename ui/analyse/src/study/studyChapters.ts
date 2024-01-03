@@ -8,6 +8,7 @@ import { StudyChapterEditForm } from './chapterEditForm';
 import { StudyChapterNewForm } from './chapterNewForm';
 import { LocalPaths, StudyChapter, StudyChapterConfig, StudyChapterMeta, TagArray } from './interfaces';
 import StudyCtrl from './studyCtrl';
+import Sortable from 'sortablejs';
 
 export default class StudyChaptersCtrl {
   newForm: StudyChapterNewForm;
@@ -66,7 +67,7 @@ export function view(ctrl: StudyCtrl): VNode {
   const canContribute = ctrl.members.canContribute(),
     current = ctrl.currentChapter();
 
-  function update(vnode: VNode) {
+  async function update(vnode: VNode) {
     const newCount = ctrl.chapters.list().length,
       vData = vnode.data!.li!,
       el = vnode.elm as HTMLElement;
@@ -80,17 +81,14 @@ export function view(ctrl: StudyCtrl): VNode {
     }
     vData.count = newCount;
     if (canContribute && newCount > 1 && !vData.sortable) {
-      const makeSortable = function () {
-        vData.sortable = window.Sortable.create(el, {
-          draggable: '.draggable',
-          handle: 'ontouchstart' in window ? 'span' : undefined,
-          onSort() {
-            ctrl.chapters.sort(vData.sortable.toArray());
-          },
-        });
-      };
-      if (window.Sortable) makeSortable();
-      else lichess.asset.loadIife('javascripts/vendor/Sortable.min.js').then(makeSortable);
+      const sortable = await lichess.asset.loadEsm<typeof Sortable>('sortable');
+      vData.sortable = sortable.create(el, {
+        draggable: '.draggable',
+        handle: 'ontouchstart' in window ? 'span' : undefined,
+        onSort() {
+          ctrl.chapters.sort(vData.sortable.toArray());
+        },
+      });
     }
   }
 
