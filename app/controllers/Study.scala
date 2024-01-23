@@ -26,24 +26,29 @@ final class Study(
 
   private given lila.user.FlairApi = env.user.flairApi
 
-  def search(text: String, page: Int) = OpenBody:
+  def search(text: String, order: String, page: Int) = OpenBody:
     Reasonable(page):
-      if text.trim.isEmpty then
-        env.study.pager.all(Order.default, page) flatMap: pag =>
-          preloadMembers(pag) >> negotiate(
-            Ok.page(html.study.list.all(pag, Order.default)),
-            apiStudies(pag)
-          )
-      else
-        env.studySearch(ctx.me)(text, page) flatMap: pag =>
-          negotiate(
-            Ok.page(html.study.list.search(pag, text)),
-            apiStudies(pag)
-          )
+      Order(order) match
+        case order if !Order.withoutSelector.contains(order) =>
+          Redirect(routes.Study.searchDefault(text, page)).toFuccess
+        case order =>
+          if text.trim.isEmpty then
+            env.study.pager.all(order, page) flatMap: pag =>
+              preloadMembers(pag) >> negotiate(
+                Ok.page(html.study.list.all(pag, order)),
+                apiStudies(pag)
+              )
+          else
+            env.studySearch(ctx.me)(text, page) flatMap: pag =>
+              negotiate(
+                Ok.page(html.study.list.search(pag, order, text)),
+                apiStudies(pag)
+              )
 
   def homeLang = LangPage(routes.Study.allDefault())(allResults(Order.Hot, 1))
 
-  def allDefault(page: Int) = all(Order.Hot, page)
+  def allDefault(page: Int)                  = all(Order.Hot, page)
+  def searchDefault(text: String, page: Int) = search(text, Order.Hot.key, page)
 
   def all(order: Order, page: Int) = Open:
     allResults(order, page)

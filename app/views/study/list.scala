@@ -96,7 +96,7 @@ object list:
       url = o => routes.Study.minePrivate(o)
     )
 
-  def search(pag: Paginator[WithChaptersAndLiked], text: String)(using PageContext) =
+  def search(pag: Paginator[WithChaptersAndLiked], order: Order, text: String)(using PageContext) =
     views.html.base.layout(
       title = text,
       moreCss = cssTag("study.index"),
@@ -108,9 +108,10 @@ object list:
         main(cls := "page-menu__content study-index box")(
           div(cls := "box__top")(
             searchForm(trans.search.search.txt(), text),
+            bits.orderSelect(order, "", url = o => routes.Study.search(text, o, 1)),
             bits.newForm()
           ),
-          paginate(pag, routes.Study.search(text))
+          paginate(pag, routes.Study.search(text, order.key))
         )
       )
     }
@@ -164,7 +165,7 @@ object list:
     )
 
   private[study] def searchForm(placeholder: String, value: String) =
-    form(cls := "search", action := routes.Study.search(), method := "get")(
+    form(cls := "search", action := routes.Study.searchDefault(), method := "get")(
       input(name       := "q", st.placeholder := placeholder, st.value := value, enterkeyhint := "search"),
       submitButton(cls := "button", dataIcon  := licon.Search)
     )
