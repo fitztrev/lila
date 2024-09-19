@@ -16,6 +16,14 @@ export default class CurrentPuzzle {
     this.line = puzzle.line.split(' ');
     this.pov = opposite(parseFen(puzzle.fen).unwrap().turn);
     this.startAt = getNow();
+
+    console.log('####### CurrentPuzzle #######', {
+      index,
+      puzzle,
+      line: this.line,
+      pov: this.pov,
+      startAt: this.startAt,
+    });
   }
 
   position = (index: number = this.moveIndex + 1): Chess => {
@@ -45,6 +53,12 @@ export default class CurrentPuzzle {
     );
     // adding san is garbage of course, but site.sound just cares about x, #, and +
     const combined = this.isOver() ? prevSan : prevSan + currSan;
+    console.log('playSound', {
+      combined,
+      uci: this.lastMove(),
+      current: this,
+      prev,
+    });
     site.sound.move({ san: combined, uci: this.lastMove() });
   }
 }

@@ -74,6 +74,7 @@ export default class StormCtrl implements PuzCtrl {
       }
     });
     $('#zentog').on('click', this.toggleZen);
+    console.log('################', 'StormCtrl.constructor', '################');
     this.run.current.playSound();
   }
 
@@ -98,6 +99,7 @@ export default class StormCtrl implements PuzCtrl {
   };
 
   userMove = (orig: Key, dest: Key): void => {
+    console.log('userMove', orig, dest);
     if (!this.promotion.start(orig, dest, { submit: this.playUserMove })) this.playUserMove(orig, dest);
   };
 
@@ -114,6 +116,7 @@ export default class StormCtrl implements PuzCtrl {
       pos.play(parseUci(uci)!);
       const correct = pos.isCheckmate() || uci == puzzle.expectedMove();
       if (correct) {
+        console.log('playUserMove: correct');
         puzzle.moveIndex++;
         this.run.combo.inc();
         this.run.modifier.moveAt = now;
@@ -129,6 +132,7 @@ export default class StormCtrl implements PuzCtrl {
           puzzle.moveIndex++;
         }
       } else {
+        console.log('playUserMove: wrong');
         sound.wrong();
         this.pushToHistory(false);
         this.run.errors++;
