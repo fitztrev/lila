@@ -45,7 +45,7 @@ final class RelayRound(
                 .create(setup, nav.tour)
                 .flatMap: rt =>
                   negotiate(
-                    Redirect(routes.RelayRound.edit(rt.relay.id)).flashSuccess,
+                    Redirect(routes.RelayRound.show(nav.tour.slug, rt.relay.slug, rt.relay.id)),
                     JsonOk(env.relay.jsonView.myRound(rt))
                   )
         )

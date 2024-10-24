@@ -337,6 +337,19 @@ $hover-bg: $m-primary_bg--mix-30;
       margin-bottom: 3em;
     }
   }
+  &__owner-getting-started {
+    @extend %box-neat, %tour-margin-horiz;
+    background: $c-bg-zebra;
+    padding: 3em 2vw 1em 2vw;
+    h2 {
+      margin-bottom: 2rem;
+    }
+    ul {
+      li {
+        list-style: disc;
+      }
+    }
+  }
   &__share {
     @extend %box-neat, %tour-margin-horiz;
     background: $c-bg-zebra;

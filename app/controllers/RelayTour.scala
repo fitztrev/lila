@@ -101,7 +101,7 @@ final class RelayTour(env: Env, apiC: => Api, roundC: => RelayRound) extends Lil
           rateLimitCreation(whenRateLimited):
             env.relay.api.tourCreate(setup).flatMap { tour =>
               negotiate(
-                Redirect(routes.RelayRound.form(tour.id)).flashSuccess,
+                Redirect(routes.RelayRound.form(tour.id)),
                 JsonOk(env.relay.jsonView.fullTourWithRounds(tour.withRounds(Nil), group = none))
               )
             }

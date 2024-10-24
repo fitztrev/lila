@@ -174,9 +174,51 @@ const overview = (ctx: RelayViewContext) => {
           hook: innerHTML(tour.description, () => tour.description!),
         })
       : undefined,
+    ctx.study.members.isOwner() && ctx.study.chapters.list.looksNew() && roundIsReady(ctx),
     ...(ctx.ctrl.isEmbed ? [] : [showSource(ctx.relay.data), share(ctx)]),
   ];
 };
+
+const roundIsReady = (ctx: RelayViewContext) =>
+  h('div.relay-tour__owner-getting-started', [
+    h('h2.text', { attrs: dataIcon(licon.RadioTower) }, `${ctx.relay.roundName()} is ready`),
+    h('div', [
+      h('p', ['Here are some next steps:']),
+      h('ul', [
+        h('li', [
+          h(
+            'a',
+            {
+              attrs: {
+                href: `/broadcast/${ctx.relay.data.tour.id}/new`,
+              },
+            },
+            'Add another round',
+          ),
+          ' if needed',
+        ]),
+        ctx.relay.data.sync?.url || ctx.relay.data.sync?.ids || ctx.relay.data.sync?.urls
+          ? h('li', 'Connect to the game source to start checking for games')
+          : h('li', [
+              'Start sending games using the ',
+              h('a', { attrs: { href: '/broadcast/app' } }, 'Broadcaster App'),
+            ]),
+        h(
+          'li',
+          h(
+            'a',
+            {
+              attrs: {
+                href: '/broadcast/help#how-to-make-a-broadcast-official',
+              },
+            },
+            'Request your broadcast to be featured',
+          ),
+        ),
+        h('li', 'Share the broadcast with your audience'),
+      ]),
+    ]),
+  ]);
 
 const share = (ctx: RelayViewContext) => {
   const iframe = (path: string) =>
