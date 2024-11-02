@@ -186,7 +186,7 @@ object header:
                       )
                     )
                   ),
-                (ctx.kid.no && !hideTroll && !u.kid).option(
+                (isGranted(_.UserModView) || ctx.kid.no && !hideTroll && !u.kid).option(
                   frag(
                     profile.nonEmptyRealName.map: name =>
                       strong(cls := "name")(name),
@@ -226,14 +226,14 @@ object header:
                       playTime.nonEmptyTvDuration.map: tvDuration =>
                         p(trans.site.tpTimeSpentOnTV(lila.core.i18n.translateDuration(tvDuration)))
                     ),
-                  (!hideTroll && !u.kid).option(
+                  (isGranted(_.UserModView) || !hideTroll && !u.kid).option(
                     div(cls := "social_links col2")(
                       profile.actualLinks.nonEmpty.option(strong(trans.site.socialMediaLinks())),
                       profile.actualLinks.map: link =>
                         a(href := link.url, targetBlank, noFollow, relMe)(link.site.name)
                     )
                   ),
-                  (ctx.is(u) || !u.kid).option(
+                  (isGranted(_.UserModView) || ctx.is(u) || !u.kid).option(
                     div(cls := "teams col2")(
                       info.teamIds.nonEmpty.option(strong(trans.team.teams())),
                       info.teamIds
