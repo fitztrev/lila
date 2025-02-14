@@ -143,6 +143,8 @@ async function splitConfig(cfgPath: string): Promise<SplitConfig[]> {
     const noCheckData = structuredClone(config);
     const noCheck = join(env.buildTempDir, 'noCheck', `${pkgName}.tsconfig.json`);
     noCheckData.compilerOptions.noCheck = true;
+    noCheckData.include.push(join(root, 'tests/**/*'));
+    console.log(noCheckData);
     noCheckData.compilerOptions.emitDeclarationOnly = true;
     noCheckData.compilerOptions.tsBuildInfoFile = join(env.buildTempDir, 'noCheck', `${pkgName}.tsbuildinfo`);
     res.push({ type: 'noCheck', configFile: noCheck, pkgName, size: config.size });
