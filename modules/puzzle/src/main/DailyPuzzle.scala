@@ -10,7 +10,8 @@ import Puzzle.BSONFields as F
 final private[puzzle] class DailyPuzzle(
     colls: PuzzleColls,
     pathApi: PuzzlePathApi,
-    cacheApi: lila.memo.CacheApi
+    cacheApi: lila.memo.CacheApi,
+    chatApi: lila.chat.ChatApi
 )(using Executor, Scheduler):
 
   import BsonHandlers.given
@@ -96,6 +97,8 @@ final private[puzzle] class DailyPuzzle(
           )
       .flatMap:
         _.flatMap(puzzleReader.readOpt).so { puzzle =>
+          val today = nowInstant.toString.take(10)
+          chatApi.system(ChatId(s"${puzzle.gameId}/w"), s"dailyPuzzle:${puzzle.id}:${today}", _.round)
           colls.puzzle(_.updateField($id(puzzle.id), F.day, nowInstant)).inject(puzzle.some)
         }
 

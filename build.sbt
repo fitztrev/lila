@@ -134,7 +134,7 @@ lazy val cms = module("cms",
 )
 
 lazy val puzzle = module("puzzle",
-  Seq(tree, memo, rating),
+  Seq(tree, memo, rating, chat),
   tests.bundle
 )
 

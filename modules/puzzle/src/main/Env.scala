@@ -24,7 +24,8 @@ final class Env(
     cacheApi: lila.memo.CacheApi,
     mongoCacheApi: lila.memo.MongoCache.Api,
     gameRepo: lila.core.game.GameRepo,
-    mongo: lila.db.Env
+    mongo: lila.db.Env,
+    chatApi: lila.chat.ChatApi
 )(using Executor, akka.actor.ActorSystem, akka.stream.Materializer, lila.core.i18n.Translator)(using
     scheduler: Scheduler,
     mode: play.api.Mode

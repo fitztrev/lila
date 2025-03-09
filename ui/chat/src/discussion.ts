@@ -10,6 +10,8 @@ import type ChatCtrl from './ctrl';
 import { tempStorage } from 'common/storage';
 import { pubsub } from 'common/pubsub';
 import { alert } from 'common/dialog';
+import { displayLocale } from 'common/i18n';
+import { dataIcon } from 'common/snabbdom';
 
 const whisperRegex = /^\/[wW](?:hisper)?\s/;
 
@@ -181,6 +183,26 @@ const profileLinkRegex = /(https:\/\/)?lichess\.org\/@\/([a-zA-Z0-9_-]+)/g;
 
 const processProfileLink = (text: string) => text.replace(profileLinkRegex, '@$2');
 
+const renderDailyPuzzle = (text: string) => {
+  const [_, puzzleId, yyyymmdd] = text.split(':');
+  const date = new Date(yyyymmdd);
+
+  return h('div', [
+    h('i.text', { attrs: dataIcon(licon.Logo) }),
+    h('a', {
+      attrs: {
+        href: `/training/${puzzleId}`,
+      },
+    }, i18n.puzzle.dailyPuzzle),
+    ' - ',
+    date.toLocaleDateString(displayLocale, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }),
+  ])
+};
+
 function renderText(t: string, opts?: enhance.EnhanceOpts) {
   const processedText = processProfileLink(t);
   if (enhance.isMoreThanText(processedText)) {
@@ -194,9 +216,15 @@ const userThunk = (name: string, title?: string, patron?: boolean, flair?: Flair
   userLink({ name, title, patron, line: !!patron, flair });
 
 function renderLine(ctrl: ChatCtrl, line: Line): VNode {
+  const isSystemMsg = line.u === 'lichess'
+
+  if (isSystemMsg && line.t.startsWith('dailyPuzzle')) {
+    return h('li.daily-puzzle', renderDailyPuzzle(line.t));
+  }
+
   const textNode = renderText(line.t, ctrl.opts.enhance);
 
-  if (line.u === 'lichess') return h('li.system', textNode);
+  if (isSystemMsg) return h('li.system', textNode);
 
   if (line.c) return h('li', [h('span.color', '[' + line.c + ']'), textNode]);
 
